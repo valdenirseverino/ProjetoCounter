@@ -12,10 +12,6 @@ public class Dispositivo {
 	private String redeConectada;
 	private String fabricante;
 
-	public Dispositivo() {
-		super();
-	}
-
 	public String getEnderecoMAC() {
 		return enderecoMAC;
 	}
