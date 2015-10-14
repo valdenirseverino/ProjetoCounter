@@ -7,7 +7,6 @@ public class DateUtils {
 		try {
 
 			String vetor[] = data.substring(11).split(":");
-
 			return Integer.parseInt(vetor[1]) + (60 * Integer.parseInt(vetor[0]));
 
 		} catch (Exception e) {

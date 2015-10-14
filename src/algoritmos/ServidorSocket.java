@@ -1,29 +1,34 @@
-package objetos;
+package algoritmos;
 
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServidorTCPBasico {
+public class ServidorSocket {
 
 	private static ServerSocket servidor;
 
 	public static void main(String[] args) {
 		try {
-
+			
 			servidor = new ServerSocket(8080);
+			PesquisarMac scan = new PesquisarMac();
 
 			System.out.println("Servidor ouvindo a porta 8080");
 
 			while (true) {
 
 				Socket cliente = servidor.accept();
-				System.out.println("Cliente conectado: " + cliente.getInetAddress().getHostAddress());
+
+				scan.realizarVarredura();
 
 				ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
 
-				String m = (String) entrada.readObject();
-				System.out.println(m);
+				String mensagem[] = ((String) entrada.readObject()).split(";");
+				String mac = mensagem[0];
+
+				System.out.println("MAC: " + mac + " Localização: " + mensagem[1] + " Sinal: "
+						+ scan.pesquisarMac(mac).getPotenciaSinal());
 
 			}
 

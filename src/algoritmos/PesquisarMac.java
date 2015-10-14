@@ -8,19 +8,19 @@ import java.util.HashMap;
 import objetos.Dispositivo;
 import objetos.Redes;
 
-public class ScanMac {
+public class PesquisarMac {
 
 	private HashMap<String, Dispositivo> grupoDispositivos;
 	private HashMap<String, Redes> grupoRedes;
-	private boolean isRedes, isDispositivos;
+
+	private boolean isDispositivos;
 
 	private void formatarDados() {
 		this.isDispositivos = false;
-		this.isRedes = false;
 		this.grupoDispositivos = new HashMap<String, Dispositivo>();
 	}
 
-	public ScanMac() {
+	public PesquisarMac() {
 		formatarDados();
 	}
 
@@ -30,6 +30,19 @@ public class ScanMac {
 
 	public HashMap<String, Redes> getGrupoRedes() {
 		return grupoRedes;
+	}
+
+	public Dispositivo pesquisarMac(String mac) {
+	
+		for (String key : this.grupoDispositivos.keySet()) {
+
+			Dispositivo dispositivo = grupoDispositivos.get(key);
+
+			if (dispositivo.getEnderecoMAC().equalsIgnoreCase(mac))
+				return dispositivo;
+		}
+	
+		return null;
 	}
 
 	public void realizarVarredura() {
@@ -47,13 +60,10 @@ public class ScanMac {
 
 				if (coluna.length >= 1) {
 
-					if (coluna[0].equalsIgnoreCase("BSSID")) {
-						this.isRedes = true;
+					if (coluna[0].equalsIgnoreCase("BSSID")) 
 						continue;
-					}
-
+					
 					if (coluna[0].equalsIgnoreCase("Station MAC")) {
-						this.isRedes = false;
 						this.isDispositivos = true;
 						continue;
 					}
@@ -76,12 +86,7 @@ public class ScanMac {
 
 						grupoDispositivos.put(coluna[0], dispositivo);
 					}
-
-					if (isRedes) {
-
-					}
 				}
-
 			}
 
 			bufferedReader.close();
@@ -129,7 +134,8 @@ public class ScanMac {
 		ArrayList<String> mac = new ArrayList<>();
 
 		for (String key : map.keySet())
-			if (map.get(key).getPotenciaSinal() == null	|| Integer.parseInt(map.get(key).getPotenciaSinal()) > valorMinimo)
+			if (map.get(key).getPotenciaSinal() == null
+					|| Integer.parseInt(map.get(key).getPotenciaSinal()) > valorMinimo)
 				mac.add(key);
 
 		StringBuilder log = new StringBuilder();

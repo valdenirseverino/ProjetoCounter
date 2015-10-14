@@ -2,7 +2,7 @@ package testes;
 
 import java.util.HashMap;
 
-import algoritmos.ScanMac;
+import algoritmos.PesquisarMac;
 import objetos.Dispositivo;
 
 public class TesteAplicacao {
@@ -10,7 +10,7 @@ public class TesteAplicacao {
 
 		try {
 
-			ScanMac scan = new ScanMac();
+			PesquisarMac scan = new PesquisarMac();
 
 			while (true) {
 
@@ -21,8 +21,8 @@ public class TesteAplicacao {
 
 				StringBuilder log = new StringBuilder();
 
-				log.append(scan.filtrarDispositivosTempoAtivo());
-				log.append(scan.filtrarDispositivosPotenciaSinal(-94));
+//				log.append(scan.filtrarDispositivosTempoAtivo());
+//				log.append(scan.filtrarDispositivosPotenciaSinal(-94));
 
 				HashMap<String, Dispositivo> meusDispositivos = scan.getGrupoDispositivos();
 
