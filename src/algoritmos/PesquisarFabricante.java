@@ -7,7 +7,7 @@ import java.io.IOException;
 public class PesquisarFabricante {
 
 	private BufferedReader lerArq;
-	public static String enderecoArquivo = "/home/valdenir/Documentos/Devices_MAC.csv";
+	public static String enderecoArquivo = "/home/vald3nir/Documentos/Devices_MAC.csv";
 
 	public String buscarFabricante(String mac) {
 
